@@ -39,20 +39,18 @@ public class TokenFilter extends ZuulFilter{
 
 		String authorities = request.getHeader("Authorization");// 获取请求头的参数
 		
-//		if (StringUtils.isNotBlank(authorities)) {
-//		    ctx.setSendZuulResponse(true); //对请求进行路由
-//		    ctx.setResponseStatusCode(200);
-//		    ctx.set("isSuccess", true);
-//		    return null;
-//		} else {
-//		    ctx.setSendZuulResponse(false); //不对其进行路由
-//		    ctx.setResponseStatusCode(400);
-//		    ctx.setResponseBody("The resource need to get authenticty");
-//		    ctx.set("isSuccess", false);
-//		    return null;
-//		}
-		 ctx.setSendZuulResponse(true);
-		return null;
+		if (StringUtils.isNotBlank(authorities)) {
+		    ctx.setSendZuulResponse(true); //对请求进行路由
+		    ctx.setResponseStatusCode(200);
+		    ctx.set("isSuccess", true);
+		    return null;
+		} else {
+		    ctx.setSendZuulResponse(false); //不对其进行路由
+		    ctx.setResponseStatusCode(400);
+		    ctx.setResponseBody("The resource need to get authenticty");
+		    ctx.set("isSuccess", false);
+		    return null;
+		}
 	}
 
 }
